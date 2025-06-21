@@ -4,7 +4,10 @@ import com.javatechie.crud.example.entity.Product;
 import com.javatechie.crud.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
+import java.util.Map;
 import java.util.List;
 
 @RestController
@@ -49,8 +52,28 @@ public class ProductController {
     }
 
     @GetMapping("/products/search")
-    public List<Product> searchProducts(@RequestParam String keyword){
-        return service.searchProducts(keyword);
-    }
+    public ResponseEntity<?> searchProducts(
+    @RequestParam(required = false) String keyword,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "10") int size,
+    @RequestParam(defaultValue = "name") String sortBy) {
     
+        try {
+            if (keyword == null || keyword.trim().isEmpty()) {
+                return ResponseEntity.badRequest()
+                    .body(Map.of("error", "Search keyword is required"));
+            }
+        
+            List<Product> products = service.searchProductsAdvanced(keyword, page, size, sortBy);
+            return ResponseEntity.ok(Map.of(
+                "products", products,
+                "totalResults", products.size(),
+                "page", page,
+                "size", size
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "Search failed: " + e.getMessage()));
+        }
+    }
 }

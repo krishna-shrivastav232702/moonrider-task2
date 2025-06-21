@@ -4,6 +4,10 @@ import com.javatechie.crud.example.entity.Product;
 import com.javatechie.crud.example.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -45,9 +49,9 @@ public class ProductService {
         return repository.save(existingProduct);
     }
 
-    public List<Product>searchProducts(String keyword){
-        return repository.findByNameContainingIgnoreCase(keyword);
+    public List<Product>searchProductsAdvanced(String keyword,int page,int size,String sortBy){
+        Pageable pageable = PageRequest.of(page,size,Sort.by(sortBy));
+        Page<Product>productPage = repository.findByNameContainingIgnoreCase(keyword,pageable);
+        return productPage.getContent();
     }
-    
-
 }
