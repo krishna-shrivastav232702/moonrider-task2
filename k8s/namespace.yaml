@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: product-catalogue-v1
+  labels:
+    version: v1.0
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: product-catalogue-v1-1
+  labels:
+    version: v1.1
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: product-catalogue-v2
+  labels:
+    version: v2.0

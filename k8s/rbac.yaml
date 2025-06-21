@@ -1,0 +1,108 @@
+# RBAC Configuration for Product Catalogue
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: product-catalogue-sa
+  namespace: product-catalogue-v1
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: product-catalogue-sa
+  namespace: product-catalogue-v1-1
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: product-catalogue-sa
+  namespace: product-catalogue-v2
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: product-catalogue-v1
+  name: product-catalogue-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["secrets", "configmaps"]
+  verbs: ["get", "list"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: product-catalogue-v1-1
+  name: product-catalogue-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["secrets", "configmaps"]
+  verbs: ["get", "list"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: product-catalogue-v2
+  name: product-catalogue-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["secrets", "configmaps"]
+  verbs: ["get", "list"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: product-catalogue-binding
+  namespace: product-catalogue-v1
+subjects:
+- kind: ServiceAccount
+  name: product-catalogue-sa
+  namespace: product-catalogue-v1
+roleRef:
+  kind: Role
+  name: product-catalogue-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: product-catalogue-binding
+  namespace: product-catalogue-v1-1
+subjects:
+- kind: ServiceAccount
+  name: product-catalogue-sa
+  namespace: product-catalogue-v1-1
+roleRef:
+  kind: Role
+  name: product-catalogue-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: product-catalogue-binding
+  namespace: product-catalogue-v2
+subjects:
+- kind: ServiceAccount
+  name: product-catalogue-sa
+  namespace: product-catalogue-v2
+roleRef:
+  kind: Role
+  name: product-catalogue-role
+  apiGroup: rbac.authorization.k8s.io
