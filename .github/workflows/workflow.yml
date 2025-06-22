@@ -15,7 +15,7 @@ jobs:
 
     - name: Set image tag
       id: set-tag
-      run: echo "tag=${{GITHUB_SHA::8}}" >> $GITHUB_OUTPUT
+      run: echo "tag=${{GITHUB_SHA:0:8}}" >> $GITHUB_OUTPUT
 
     - name: Docker Login
       uses: docker/login-action@v3
@@ -32,7 +32,7 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
     outputs:
-    image-tag: ${{ steps.set-tag.outputs.tag }}
+      image-tag: ${{ steps.set-tag.outputs.tag }}
 
   deploy:
     runs-on: [self-hosted, linux, x64]
