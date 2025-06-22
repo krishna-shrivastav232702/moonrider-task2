@@ -20,4 +20,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: krishna2302/moonrider-prod:{{ github.sha }}
+        tags: krishna2302/moonrider-prod:${{ github.sha }}
