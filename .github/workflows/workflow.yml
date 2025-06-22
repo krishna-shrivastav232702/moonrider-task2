@@ -1,0 +1,23 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+
+    - name: Docker Login
+      uses: docker/login-action@v3
+      with:
+        username: ${{secrets.DOCKERHUB_USERNAME}}
+        password: ${{secrets.DOCKERHUB_TOKEN}}
+    
+    - name: Build and Push
+      uses: docker/build-push-actions@v6
+      with:
+        context: .
+        push: true
+        tags: krishna2302/moonrider-prod:{{ github.sha }}
