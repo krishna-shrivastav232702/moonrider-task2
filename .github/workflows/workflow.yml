@@ -15,7 +15,9 @@ jobs:
 
     - name: Set image tag
       id: set-tag
-      run: echo "tag=${{GITHUB_SHA:0:8}}" >> $GITHUB_OUTPUT
+      run: |
+        SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-8)
+        echo "tag=$SHORT_SHA" >> "$GITHUB_OUTPUT"
 
     - name: Docker Login
       uses: docker/login-action@v3
