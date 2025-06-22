@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: product-catalogue
-        image: product-catalogue:v1.0.0
+        image: krishna2302/moonrider-prod:IMAGE_TAG
         ports:
         - containerPort: 9191
         env:
