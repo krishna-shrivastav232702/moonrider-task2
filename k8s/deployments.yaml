@@ -8,7 +8,7 @@ metadata:
     app: product-catalogue
     version: v1.0
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: product-catalogue
@@ -40,10 +40,10 @@ spec:
           value: "9191"
         resources:
           requests:
-            memory: "512Mi"
+            memory: "768Mi"
             cpu: "500m"
           limits:
-            memory: "1Gi"
+            memory: "1.5Gi"
             cpu: "1000m"
         livenessProbe:
           httpGet:
@@ -91,7 +91,7 @@ metadata:
     app: product-catalogue
     version: v1.1
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: product-catalogue
@@ -123,11 +123,11 @@ spec:
           value: "9191"
         resources:
           requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
             memory: "512Mi"
             cpu: "500m"
-          limits:
-            memory: "1Gi"
-            cpu: "1000m"
         livenessProbe:
           httpGet:
             path: /health
@@ -174,7 +174,7 @@ metadata:
     app: product-catalogue
     version: v2.0
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: product-catalogue
@@ -206,11 +206,11 @@ spec:
           value: "9191"
         resources:
           requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
             memory: "512Mi"
             cpu: "500m"
-          limits:
-            memory: "1Gi"
-            cpu: "1000m"
         livenessProbe:
           httpGet:
             path: /health

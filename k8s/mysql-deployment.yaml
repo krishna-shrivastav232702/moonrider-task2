@@ -73,10 +73,10 @@ spec:
           mountPath: /var/lib/mysql
         resources:
           requests:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "768Mi"
+            cpu: "750m"
           limits:
-            memory: "1Gi"
+            memory: "1.5Gi"
             cpu: "1000m"
         livenessProbe:
           exec:
@@ -150,11 +150,11 @@ spec:
           mountPath: /var/lib/mysql
         resources:
           requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
             memory: "512Mi"
             cpu: "500m"
-          limits:
-            memory: "1Gi"
-            cpu: "1000m"
         livenessProbe:
           exec:
             command:
@@ -227,11 +227,11 @@ spec:
           mountPath: /var/lib/mysql
         resources:
           requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
             memory: "512Mi"
             cpu: "500m"
-          limits:
-            memory: "1Gi"
-            cpu: "1000m"
         livenessProbe:
           exec:
             command:
