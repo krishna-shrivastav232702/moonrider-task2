@@ -1,4 +1,3 @@
-# RBAC Configuration for Product Catalogue
 apiVersion: v1
 kind: ServiceAccount
 metadata:
