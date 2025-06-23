@@ -39,11 +39,11 @@ spec:
           value: "9191"
         resources:
           requests:
-            memory: "768Mi"
-            cpu: "750m"
+            memory: "256Mi"
+            cpu: "250m"
           limits:
-            memory: "1.5Gi"
-            cpu: "1500m"
+            memory: "512Mi"
+            cpu: "500m"
         livenessProbe:
           httpGet:
             path: /health
